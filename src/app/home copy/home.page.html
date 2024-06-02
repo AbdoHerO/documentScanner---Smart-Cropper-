@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Document Scanner</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <input type="file" (change)="onFileChange($event)" />
+  <div *ngIf="imageUrl" style="position: relative;">
+    <img #imageElement [src]="imageUrl" id="original" alt="Selected Image" style="width: 100%; display: block;" />
+    <div id="cropper" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0;">
+      <image-cropper style="width: 100%; height: 100%;"></image-cropper>
+    </div>
+    <button (click)="openCropper()">Open Cropper</button>
+    <button (click)="getUpdatedCoordinates()">Get Updated Coordinates</button>
+  </div>
+</ion-content>
