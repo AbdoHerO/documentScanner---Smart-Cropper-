@@ -8,7 +8,7 @@
   <div class="container">
     <div class="image-container">
       <img id="unfilteredImage" src="assets/unfiltered_image.jpg" alt="Unfiltered Document">
-      <div [ngClass]="{'filter-animation': true, 'd-block-img': isScanning, 'scanning': isScanning}">
+      <div [ngClass]="{'filter-animation': true, 'd-block-img': isScanning, 'hide-animation': hideAnimation, 'scanning': isScanning}">
         <div class="scan-line" *ngIf="isScanning"></div>
         <img src="assets/filtered_image.jpg" alt="Filtered Document">
       </div>

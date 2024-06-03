@@ -1,96 +1,107 @@
-ion-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-    position: relative;
-    text-align: center;
-    margin-top: 20px;
-    width: 100%;
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 80%;
+}
+
+#unfilteredImage {
+  width: 100%;
+  display: block;
+}
+
+.filter-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.filter-animation img {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.filter-animation.d-block-img img {
+  display: block;
+}
+
+@keyframes scanEffect {
+  from {
+    clip-path: inset(0 0 100% 0);
   }
-  
-  .image-container {
-    position: relative;
-    display: inline-block;
-    width: 80%;
+  to {
+    clip-path: inset(0 0 0 0);
   }
-  
-  #unfilteredImage {
-    width: 100%;
-    display: block;
-  }
-  
-  .filter-animation {
-    position: absolute;
+}
+
+.scanning {
+  animation: scanEffect 2s forwards;
+}
+
+.scanning-active {
+  box-shadow: 0px 0px 20px 10px rgba(0, 128, 0, 0.5);
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: green;
+  box-shadow: 0 0 20px 10px rgba(0, 128, 0, 0.7);
+  animation: scanLineMove 2s forwards;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scan-line::before {
+  content: '◥◤';
+  font-size: 15px;
+  color: green;
+  margin-left: -8px;
+  margin-bottom: 28px;
+  transform: rotate(-90deg);
+}
+
+.scan-line::after {
+  content: '◥◤';
+  font-size: 15px;
+  color: green;
+  margin-right: -8px;
+  margin-bottom: 28px;
+  transform: rotate(90deg);
+}
+
+.hide-animation{
+    .scan-line{
+        display: none;
+    }
+}
+
+@keyframes scanLineMove {
+  from {
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
   }
-  
-  .filter-animation img {
-    width: 100%;
-    height: 100%;
-    display: none;
+  to {
+    top: 100%;
   }
-  
-  .filter-animation.d-block-img img {
-    display: block;
-  }
-  
-  @keyframes scanEffect {
-    from {
-      clip-path: inset(0 0 100% 0);
-    }
-    to {
-      clip-path: inset(0 0 0 0);
-    }
-  }
-  
-  .scanning {
-    animation: scanEffect 2s forwards;
-    box-shadow: 0px 0px 20px 10px rgba(0, 128, 0, 0.5);
-  }
-  
-  .scanning::before {
-    content: '◥';
-    position: absolute;
-    left: 5px;
-    top: -20px;
-    font-size: 20px;
-    color: green;
-  }
-  
-  .scanning::after {
-    content: '◤';
-    position: absolute;
-    right: 5px;
-    top: -20px;
-    font-size: 20px;
-    color: green;
-  }
-  
-  .scan-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background-color: green;
-    box-shadow: 0 0 20px 10px rgba(0, 128, 0, 0.7);
-    animation: scanLineMove 2s forwards;
-  }
-  
-  @keyframes scanLineMove {
-    from {
-      top: 0;
-    }
-    to {
-      top: 100%;
-    }
-  }
-  
+}

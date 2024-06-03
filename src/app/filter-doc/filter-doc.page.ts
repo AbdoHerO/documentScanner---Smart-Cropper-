@@ -8,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 export class FilterDocPage implements OnInit {
 
   isScanning: boolean = false;
+  hideAnimation: boolean = false;
 
   constructor() {}
 
   applyFilter() {
     this.isScanning = !this.isScanning;
+    setTimeout(() => {
+      this.hideAnimation = true
+    }, 2000);
+    this.hideAnimation = false
   }
-
+  
   ngOnInit() {
   }
 }
