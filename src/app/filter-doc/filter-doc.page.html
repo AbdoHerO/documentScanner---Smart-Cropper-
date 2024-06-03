@@ -15,4 +15,21 @@
     </div>
     <ion-button expand="full" (click)="applyFilter()">Filter</ion-button>
   </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="image-container">
+      <img id="unfilteredImage" src="assets/unfiltered_image_2.jpg" alt="Unfiltered Document">
+      <div [ngClass]="{'filter-animation': true, 'd-block-img': isScanning_2, 'hide-animation': hideAnimation_2, 'scanning': isScanning_2}">
+        <div class="scan-line" *ngIf="isScanning_2"></div>
+        <img src="assets/filtered_image_2.jpg" alt="Filtered Document">
+      </div>
+    </div>
+    <ion-button expand="full" (click)="applyFilter_2()">Filter</ion-button>
+  </div>
 </ion-content>
