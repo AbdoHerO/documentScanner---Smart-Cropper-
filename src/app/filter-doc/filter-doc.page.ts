@@ -14,11 +14,13 @@ export class FilterDocPage implements OnInit {
 
   applyFilter() {
     this.isScanning = !this.isScanning;
+    if (this.isScanning) {
     setTimeout(() => {
       this.hideAnimation = true
     }, 2000);
     this.hideAnimation = false
   }
+}
   
   ngOnInit() {
   }
