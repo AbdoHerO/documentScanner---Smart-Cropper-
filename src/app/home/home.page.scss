@@ -25,3 +25,15 @@
 #container a {
   text-decoration: none;
 }
+
+.magnifier {
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  width: 100px; /* Size of magnifier */
+  height: 100px;
+  background-repeat: no-repeat;
+  display: none;
+  pointer-events: none;
+}

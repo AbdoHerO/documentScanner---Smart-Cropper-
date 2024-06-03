@@ -25,3 +25,16 @@
 #container a {
   text-decoration: none;
 }
+
+.magnifier {
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  /* Magnifier size */
+  width: 100px;
+  height: 100px;
+  /* How much you want it to magnify */
+  background-repeat: no-repeat;
+  display: none;
+}

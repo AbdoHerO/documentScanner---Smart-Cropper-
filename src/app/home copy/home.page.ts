@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnChanges{
   @ViewChild('imageElement') imageElement: ElementRef<HTMLImageElement> | undefined;
   imageUrl: any;
 
@@ -19,17 +19,20 @@ export class HomePage {
 
   constructor(private sanitizer: DomSanitizer) {}
 
+  ngOnChanges(changes: SimpleChanges) {
+    // changes.prop contains the old and the new value...
+    this.addEventListenerToAcceptUse();
+
+  }
+
   onFileChange(event: any) {
-    console.log('onFileChange');
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
         if (e.target && e.target.result) {
           this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result as string);
-          console.log("Image loaded");
           setTimeout(() => {
-            console.log("Calling openCropper");
             this.openCropper();
           }, 100);
         }
@@ -39,35 +42,25 @@ export class HomePage {
   }
 
   async openCropper() {
-    console.log("Inside openCropper");
     const originalImage = document.getElementById('original') as HTMLImageElement;
     if (!originalImage) {
-      console.log("Original image not found");
       return;
     }
 
-    console.log("Original image found");
     document.body.style.overflow = 'hidden';
     const cropper = document.querySelector('image-cropper') as any;
 
     if (cropper && originalImage) {
-      console.log("Setting cropper properties");
       cropper.img = originalImage;
-      console.log('Image set in cropper:', cropper.img);
       cropper.inactiveSelections = [];
       cropper.quad = { points: this.coordinates };
 
       const cropperContainer = document.getElementById('cropper');
       if (cropperContainer) {
         cropperContainer.style.display = 'block';
-        console.log("cropperContainer displayed:", cropperContainer);
+        // this.addEventListenerToAcceptUse();
       }
-      console.log("Cropper opened");
-
-      // Verify cropper initialization
-      console.log("Cropper quad:", cropper.quad);
     } else {
-      console.log("Cropper or original image not found");
     }
   }
 
@@ -75,7 +68,32 @@ export class HomePage {
     const cropper = document.querySelector('image-cropper') as any;
     if (cropper) {
       const updatedQuad = await cropper.getQuad();
-      console.log('Updated Coordinates:', updatedQuad);
+      console.log("updatedQuad : ", updatedQuad)
+      console.log("quaaad : ", cropper.quad)
+    }else{
+      console.log("cropper not found")
+    }
+
+
+  }
+
+  addEventListenerToAcceptUse() {
+    const acceptUseDiv = document.querySelector('.accept-use');
+    if (acceptUseDiv) {
+      acceptUseDiv.addEventListener('click', () => {
+        this.logCropperPoints();
+      });
+    } else {
+      console.error('accept-use div not found');
+    }
+  }
+
+  logCropperPoints() {
+    const cropper = document.querySelector('image-cropper') as any;
+    if (cropper) {
+      const pointsData = cropper.getPointsData();
+    } else {
+      console.error('Cropper element not found');
     }
   }
 }
