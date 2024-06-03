@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Scanner votre BL</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="image-container">
+      <img id="unfilteredImage" src="assets/unfiltered_image.jpg" alt="Unfiltered Document">
+      <div [ngClass]="{'filter-animation': true, 'd-block-img': isScanning, 'scanning': isScanning}">
+        <div class="scan-line" *ngIf="isScanning"></div>
+        <img src="assets/filtered_image.jpg" alt="Filtered Document">
+      </div>
+    </div>
+    <ion-button expand="full" (click)="applyFilter()">Filter</ion-button>
+  </div>
+</ion-content>
